@@ -6,6 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackParamsList } from '../../routes/app.routes'
 
+import { api } from '../../services/api';
+
 export default function SignIn() {
     const navigation = useNavigation<NativeStackNavigationProp<StackParamsList>>();
 
@@ -14,10 +16,11 @@ export default function SignIn() {
     async function openOrder() {
         if (!number) return
 
-
-        //precisa fazer a requisição e abrir a mesa e navegar pra proxima tela
-
-        navigation.navigate('Order', { number: number, order_id: '23fd035b-c484-4320-9784-03e4ab1f42bc' })
+        const response = await api.post('/order', {
+            table: Number(number)
+        })
+        navigation.navigate('Order', { number: number, order_id: response.data.id })
+        setNumber('');
     }
 
 
