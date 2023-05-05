@@ -1,32 +1,31 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native'
+
+import { AuthContext } from '../../contexts/AuthContext'
 
 
 export default function SignIn() {
+    const { signIn } = useContext(AuthContext);
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-
-
-    function handleLogin() {
+    async function handleLogin() {
 
         if (!email || !password) {
             return;
         }
 
-        console.log('Email: ', email)
-        console.log('Senha: ', password)
+        await signIn({ email, password })
     }
-
     return (
-
 
         <View style={styles.container}>
             <Image
                 style={styles.logo}
                 source={require('../../assets/logo.png')}
             />
+
 
             <View style={styles.inputContainer}>
                 <TextInput
@@ -49,7 +48,6 @@ export default function SignIn() {
                     <Text style={styles.buttonText}>Acessar</Text>
                 </TouchableOpacity>
             </View>
-
 
         </View>
     )
