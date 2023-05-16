@@ -6,21 +6,22 @@ import { CategoryProps } from '../../pages/Order'
 interface ModalPickerProps {
     options: CategoryProps[];
     handleCloseModal: () => void;
-    selectedItem: () => void;
+    selectedItem: (item: CategoryProps) => void;
 }
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 
 export default function ModalPicker({ handleCloseModal, options, selectedItem }: ModalPickerProps) {
 
-    function onPressItem(item: CategoryProps) {
-        console.log(item)
+    function onPressItem(item: CategoryProps) { 
+        selectedItem(item);
+        handleCloseModal();
     }
 
     const option = options.map((item, index) => {
         return (
             <TouchableOpacity key={index} style={styles.option} onPress={() => onPressItem(item)}>
-                <Text>
+                <Text style={styles.item}>
                     {item?.name}
                 </Text>
             </TouchableOpacity>
@@ -31,12 +32,10 @@ export default function ModalPicker({ handleCloseModal, options, selectedItem }:
     return (
         <TouchableOpacity style={styles.container} onPress={handleCloseModal}>
             <View style={styles.content}>
-                <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false} >
                     {option}
                 </ScrollView>
             </View>
-
-
         </TouchableOpacity>
     )
 }
@@ -55,5 +54,15 @@ const styles = StyleSheet.create({
         borderColor: '#8A8A8A',
         borderRadius: 4
     },
-    option: {}
+    option: {
+        alignItems: 'flex-start',
+        borderTopWidth: 0.8,
+        borderTopColor: '#8A8A8A'
+    },
+    item: {
+        margin: 18,
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#101026'
+    }
 })
