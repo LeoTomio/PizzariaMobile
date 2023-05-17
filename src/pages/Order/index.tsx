@@ -118,24 +118,29 @@ export default function Order() {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>Mesa {route.params.number}</Text>
-                <TouchableOpacity onPress={handleCloseOrder}>
-                    <Feather name='trash-2' size={28} color="#FF3F4b" />
-                </TouchableOpacity>
+                {items.length === 0 &&
+                    < TouchableOpacity onPress={handleCloseOrder}>
+                        <Feather name='trash-2' size={28} color="#FF3F4b" />
+                    </TouchableOpacity>}
             </View>
 
-            {!!category.length &&
+            {
+                !!category.length &&
                 <TouchableOpacity style={styles.input} onPress={() => setModalCategoryVisible(true)}>
                     <Text style={{ color: '#FFF' }}>
                         {categorySelected?.name}
                     </Text>
-                </TouchableOpacity>}
+                </TouchableOpacity>
+            }
 
-            {!!products.length &&
+            {
+                !!products.length &&
                 <TouchableOpacity style={styles.input} onPress={() => setModalProductVisible(true)}>
                     <Text style={{ color: '#FFF' }}>
                         {productSelected?.name}
                     </Text>
-                </TouchableOpacity>}
+                </TouchableOpacity>
+            }
 
             <View style={styles.qtdContainer}>
                 <Text style={styles.qtdText}>Quantidade</Text>
@@ -167,12 +172,10 @@ export default function Order() {
                 renderItem={({ item }) => <ListItem data={item} />}
             />
 
-
             <Modal
                 transparent={true}
                 visible={modalCategoryVisible}
                 animationType='fade'>
-
                 <ModalPicker
                     handleCloseModal={() => setModalCategoryVisible(false)}
                     options={category}
@@ -188,8 +191,7 @@ export default function Order() {
                     options={products}
                     selectedItem={handleChangeProduct} />
             </Modal>
-
-        </View>
+        </View >
     )
 }
 
