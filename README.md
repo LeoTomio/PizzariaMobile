@@ -7,3 +7,11 @@
 
 <h2>Link com os modelos das telas do projeto</h2>
 https://www.figma.com/file/yTPA50bLeQdJOCrg5sAOqU/Pizzaria-Sujeito?node-id=0-1
+
+<h3>Para fazer futuramente</h3>
+
+1) Ver como gerar um build do projeto para rodar direto no celular<br>
+2) Como hospedar em algum servidor
+3) Fazer uma tela de Cardapio no web
+4) Arrumar a tela de detalhes do pedido para ficar mais bonito visualmente
+
