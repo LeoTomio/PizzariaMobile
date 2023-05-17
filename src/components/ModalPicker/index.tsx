@@ -13,7 +13,7 @@ const { width: WIDTH, height: HEIGHT } = Dimensions.get('window')
 
 export default function ModalPicker({ handleCloseModal, options, selectedItem }: ModalPickerProps) {
 
-    function onPressItem(item: CategoryProps) { 
+    function onPressItem(item: CategoryProps) {
         selectedItem(item);
         handleCloseModal();
     }
@@ -27,8 +27,6 @@ export default function ModalPicker({ handleCloseModal, options, selectedItem }:
             </TouchableOpacity>
         )
     })
-
-
     return (
         <TouchableOpacity style={styles.container} onPress={handleCloseModal}>
             <View style={styles.content}>
@@ -47,20 +45,33 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     content: {
-        width: WIDTH - 20,
+        marginTop: 20,
+        width: WIDTH - 30,
         height: HEIGHT / 2,
-        backgroundColor: '#FFF',
+        backgroundColor: '#CDC9C9',
         borderWidth: 1,
-        borderColor: '#8A8A8A',
-        borderRadius: 4
+        borderColor: '#000',
+        borderTopLeftRadius:12,
+        borderTopRightRadius:12,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
     },
     option: {
-        alignItems: 'flex-start',
-        borderTopWidth: 0.8,
-        borderTopColor: '#8A8A8A'
+        alignItems: 'flex-start', 
+        borderTopRightRadius:20,
+        borderTopLeftRadius:20,
+        borderBottomRightRadius: 19,
+        borderBottomLeftRadius:19,
+        borderTopColor: '#AFAEAE',
+        elevation:5,
+        shadowOffset: { width: 0, height: 2 },
+        shadowColor: '#757373',
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
     },
     item: {
-        margin: 18,
+        marginLeft: 18,
+        margin: 16,
         fontSize: 14,
         fontWeight: 'bold',
         color: '#101026'

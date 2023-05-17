@@ -60,7 +60,7 @@ export default function Order() {
         async function loadProducts() {
             const response = await api.get('/category/product', {
                 params: {
-                    category_id: categorySelected.id
+                    category_id: categorySelected?.id
                 }
             })
             setProducts(response.data)
@@ -96,7 +96,7 @@ export default function Order() {
         })
 
         let data: ItemProps = {
-            id: response.data.id,
+            id: response.data?.id,
             product_id: productSelected?.id as string,
             name: productSelected?.name as string,
             amount: amount
@@ -119,8 +119,8 @@ export default function Order() {
     }
     function handleFinishOrder() {
         navigation.navigate("FinishOrder", {
-            number: route.params.number,
-            order_id: route.params.order_id
+            number: route.params?.number,
+            order_id: route.params?.order_id
         })
     }
     return (
@@ -224,9 +224,9 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#101026',
-        borderRadius: 4,
+        borderRadius: 8,
         width: '100%',
-        height: 40,
+        height: 50,
         marginBottom: 12,
         justifyContent: 'center',
         paddingHorizontal: 8,
