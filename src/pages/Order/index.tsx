@@ -94,7 +94,6 @@ export default function Order() {
     function handleChangeProduct(item: ProductProps) {
         setProductSelected(item)
     }
-
     //adicionando um produto nesta mesa
     async function handleAdd() {
         const response = await api.post('/order/add', {
@@ -114,12 +113,24 @@ export default function Order() {
         setItems(oldArray => [...oldArray, data])
     }
 
+    async function handleDeleteItem(item_id: string) {
+        await api.delete('/order/remove', {
+            params: {
+                item_id: item_id
+            }
+        })
+        //após remover o item da api, precisa atualizar a lista
+        let removeItem = items.filter(item => {
+            return (item.id !== item_id)
+        })
+        setItems(removeItem)
+    }
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>Mesa {route.params.number}</Text>
                 {items.length === 0 &&
-                    < TouchableOpacity onPress={handleCloseOrder}>
+                    < TouchableOpacity onPress={handleCloseOrder} >
                         <Feather name='trash-2' size={28} color="#FF3F4b" />
                     </TouchableOpacity>}
             </View>
@@ -169,7 +180,7 @@ export default function Order() {
                 style={{ flex: 1, marginTop: 24 }}
                 data={items}
                 keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <ListItem data={item} />}
+                renderItem={({ item }) => <ListItem data={item} deleteItem={handleDeleteItem} />}
             />
 
             <Modal
